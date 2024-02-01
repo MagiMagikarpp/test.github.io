@@ -1,45 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>商品選択</title>
-    <script>
-        function updateTotal() {
-            var items = document.querySelectorAll("[name^='quantity_']");
-            var totalPrice = 0;
-            items.forEach(function(item) {
-                var quantity = parseInt(item.value);
-                var price = parseFloat(item.dataset.price);
-                if (!isNaN(quantity) && !isNaN(price)) {
-                    totalPrice += quantity * price;
-                }
-            });
-            document.getElementById("total").innerText = "合計金額: " + totalPrice + "円";
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Click Example</title>
 </head>
 <body>
-    <h1>商品選択</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <th>商品名</th>
-                <th>価格</th>
-                <th>個数</th>
-            </tr>
-            {% for item in items %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.price }}</td>
-                <td>
-                    <input type="hidden" name="item_id" value="{{ item.id }}">
-                    <input type="number" name="quantity_{{ item.name }}" value="{{ item.quantity }}" min="0" data-price="{{ item.price }}" onchange="updateTotal()">
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-        <p id="total">合計金額: 0 円</p>
-        <button type="submit">購入</button>
-    </form>
+  <h1>Button Click Example</h1>
+
+  <!-- ボタン要素を追加 -->
+  <button id="myButton">Click me!</button>
+
+  <script>
+    // ボタンがクリックされたときに呼ばれる関数
+    function handleClick() {
+      alert('Button Clicked!');
+    }
+
+    // ボタン要素を取得
+    const myButton = document.getElementById('myButton');
+
+    // ボタンにクリックイベントを追加して関数を呼ぶ
+    myButton.addEventListener('click', handleClick);
+  </script>
 </body>
 </html>
