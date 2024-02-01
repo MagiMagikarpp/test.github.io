@@ -1,32 +1,45 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>商品一覧</title>
-  <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <title>商品選択</title>
+    <script>
+        function updateTotal() {
+            var items = document.querySelectorAll("[name^='quantity_']");
+            var totalPrice = 0;
+            items.forEach(function(item) {
+                var quantity = parseInt(item.value);
+                var price = parseFloat(item.dataset.price);
+                if (!isNaN(quantity) && !isNaN(price)) {
+                    totalPrice += quantity * price;
+                }
+            });
+            document.getElementById("total").innerText = "合計金額: " + totalPrice + "円";
+        }
+    </script>
 </head>
 <body>
-
-  <header>
-    <h1>商品一覧</h1>
-  </header>
-
-  <div id="column" class="m_column">
-    <h1>商品</h1>
-    <ul>
-    <!-- <li><a href=""><img src="./image/choco.jpg" /><p>チョコ</p><span>100円</span></a></li>
-    <li><a href=""><img src="./image/choco.jpg" /><p>チョコ2</p><span>100円</span></a></li>
-    <li><a href=""><img src="./image/choco.jpg" /><p>チョコ3</p><span>100円</span></a></li>
-    <li><a href=""><img src="./image/choco.jpg" /><p>チョコ4</p><span>100円</span></a></li>
-    <li><a href=""><img src="./image/zyagarico.jpg" /><p>じゃがりこ</p><span>100円</span></a></li>
-    <li><a href=""><img src="./image/zyagarico.jpg" /><p>じゃがりこ2</p><span>100円</span></a></li>
-    <li><a href=""><img src="./image/zyagarico.jpg" /><p>じゃがりこ3</p><span>100円</span></a></li>
-    <li><a href=""><img src="./image/zyagarico.jpg" /><p>じゃがりこ4</p><span>100円</span></a></li> -->
-    </ul>
-    </div>
-
-  </div>
-
+    <h1>商品選択</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>商品名</th>
+                <th>価格</th>
+                <th>個数</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                    <input type="number" name="quantity_{{ item.name }}" value="{{ item.quantity }}" min="0" data-price="{{ item.price }}" onchange="updateTotal()">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p id="total">合計金額: 0 円</p>
+        <button type="submit">購入</button>
+    </form>
 </body>
 </html>
