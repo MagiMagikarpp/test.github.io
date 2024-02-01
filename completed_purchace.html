@@ -8,5 +8,19 @@
     <form method="POST" action="">
         <button type="submit">商品選択画面に戻る</button>
     </form>
+
+    <script>
+    // ボタンがクリックされたときに呼ばれる関数
+    function handleButtonClick() {
+      // 別のページにリダイレクト
+      window.location.href = 'index.html';  // リダイレクト先のURLを指定してください
+    }
+
+    // ボタン要素を取得
+    const myButton = document.getElementById('myButton');
+
+    // ボタンにクリックイベントを追加して関数を呼ぶ
+    myButton.addEventListener('click', handleButtonClick);
+  </script>
 </body>
 </html>
