@@ -26,10 +26,10 @@ SECRET_KEY = 'django-insecure-9!t&)6ddb7f9j8x((%&6i@wocot)o3j^i7yk#qf8l-yl_rpm^6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# 環境変数からALLOWED_HOSTSを取得し、カンマで区切られた文字列として指定
+# # 環境変数からALLOWED_HOSTSを取得し、カンマで区切られた文字列として指定
 # ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -115,11 +115,18 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [BASE_DIR / "static" ]
+
+# 画像を保存する先の指定
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
+
+# 画像をdjango側で読み込むための設定
+MEDIA_URL = '/images/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

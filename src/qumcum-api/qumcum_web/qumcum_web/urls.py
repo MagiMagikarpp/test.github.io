@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from qumcum_app.views import index, item_list, check
+from django.conf import settings
+from django.conf.urls.static import static
+from qumcum_app.views import index, item_list, completed_purchase, purchase_status
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('item-list/', item_list, name='item_list'),
-    # path('completed_purchace/', completed_purchace, name='completed_purchace'),
-    path('check', check, name='check'),
-]
+    path('completed_purchase/', completed_purchase, name='completed_purchase'),
+    path('purchase_status', purchase_status, name='purchase_status'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

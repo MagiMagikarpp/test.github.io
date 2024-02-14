@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+  }
+  
+  header {
+    /* background-color: #333; */
+    background-color: #4CAF50;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+  }
+
+  .m_column {
+    text-align: center;
+  }
+  
+  #column ul {
+    width: calc(100 + 20px);
+    margin: 0 -10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  #column li {
+    list-style:none;
+    padding: 0 10px 20px;
+  }
+  
+  #column li p {
+    font-size: 120%;
+    margin-bottom: 3px;
+  }
+  
+  #column li span {
+    font-size: 120%;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  img {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    text-align: center;
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ddd;
+    object-fit: fill;
+  }
+  
+  img:last-child {
+    margin-right: 0;
+  }
+
+  /* type="number"のinput要素にだけスタイルを適用する例 */
+  input[type="number"] {
+    width: 70px;
+  }
+
+  .div_purchase_total {
+    text-align: center;
+    padding: 1em;
+  }
+
+  /* .div_purchase_Button {
+    padding: 10px 20px;
+  } */
+
+  .purchase_Button {
+    text-align: center;
+    padding: 1em;
+    /* padding: 10px 30px; パディングを追加 */
+    background-color: #4CAF50; /*ボタンの背景色 */
+    color: white; /* ボタンのテキスト色 */
+    border: none; /* ボーダーをなしにする */
+    border-radius: 10px; /* ボーダーの角を丸くする */
+    cursor: pointer; /* カーソルをポインターにする */
+  }

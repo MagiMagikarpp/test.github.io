@@ -7,14 +7,14 @@ from qumcum_app.models import Item
 import json
 from django.http.response import JsonResponse
 
-checker = 'false'
+purchase_flag = 'false'
 
 def index(request):
     return HttpResponse("Hello, World!")
 
-
 def item_list(request):
     items = Item.objects.all()
+    global purchase_flag
     for item in items:
         item.quantity = 0
 
@@ -26,23 +26,24 @@ def item_list(request):
             total_price += item.price * item.quantity
         
         if total_price > 0:
-            checker = 'true'
+            purchase_flag = 'true'
             return render(request, 'completed_purchace.html')
             
     return render(request, 'item_list.html', {'items': items})
 
 
-# def completed_purchace(request):
-#     if request.method == 'POST':
+def completed_purchase(request):
+    if request.method == 'POST':
         
-#         return render(request, 'item_list.html')
+        return render(request, 'item_list.html')
     
 
-def check(request):
-    if request.method == 'POST':
-        if checker == 'true':
-            tmp_cheker = checker
-            checker = 'False'
-            return JsonResponse({'tmp_ckecker':tmp_cheker})
-        else:
-            return JsonResponse({'ckecker':checker})
+def purchase_status(request):
+    global purchase_flag
+    #if request.method == 'POST':
+    if purchase_flag == 'true':
+        tmp_purchase_flag = purchase_flag
+        purchase_flag = 'false'
+        return JsonResponse({'purchase_flag':tmp_purchase_flag})
+    else:
+        return JsonResponse({'purchase_flag':purchase_flag})

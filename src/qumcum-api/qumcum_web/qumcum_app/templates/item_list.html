@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>商品選択</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script>
         function updateTotal() {
             var items = document.querySelectorAll("[name^='quantity_']");
@@ -17,18 +19,24 @@
         }
     </script>
 </head>
-<body>
+
+<header>
     <h1>商品選択</h1>
+</header>
+
+<!-- <body>
     <form method="POST" action="">
         {% csrf_token %}
         <table>
             <tr>
+                <th>画像</th>
                 <th>商品名</th>
                 <th>価格</th>
                 <th>個数</th>
             </tr>
             {% for item in items %}
             <tr>
+                <td><img src = "/{{ item.picture }}" style="width:300px; height:auto;" /></td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.price }}</td>
                 <td>
@@ -40,6 +48,52 @@
         </table>
         <p id="total">合計金額: 0 円</p>
         <button type="submit">購入</button>
+    </form>
+</body> -->
+
+<body>
+    <form method="POST" action="">
+        
+        <!-- <table>
+            <tr>
+                <th>画像</th>
+                <th>商品名</th>
+                <th>価格</th>
+                <th>個数</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td><img src = "/{{ item.picture }}" style="width:300px; height:auto;" /></td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                    <input type="number" name="quantity_{{ item.name }}" value="{{ item.quantity }}" min="0" data-price="{{ item.price }}" onchange="updateTotal()">
+                </td>
+            </tr>
+            {% endfor %}
+        </table> -->
+
+        {% csrf_token %}
+        <div id="column" class="m_column">
+            
+            <ul>
+                {% for item in items %}
+                <li>
+                    <img src="/{{ item.picture }}" /><p>{{ item.name }}</p><span>{{ item.price }}円</span>
+                    <input type="number" name="quantity_{{ item.name }}" value="{{ item.quantity }}" min="0" data-price="{{ item.price }}" onchange="updateTotal()">
+                </li>
+                {% endfor %}
+            </ul>
+          </div>
+
+        <div class="div_purchase_total">
+            <p id="total">合計金額: 0 円</p>
+        <div>
+        
+        <div class="div_purchase_Button">
+            <button type="submit" class="purchase_Button">購入</button>
+        </div>
     </form>
 </body>
 </html>
